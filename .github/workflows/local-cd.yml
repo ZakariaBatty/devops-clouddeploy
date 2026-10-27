@@ -50,8 +50,12 @@ jobs:
             --show-error \
             --output /dev/null \
             --write-out '%{http_code}' \
+            --connect-timeout 5 \
+            --max-time 30 \
             --retry 10 \
             --retry-delay 1 \
+            --retry-max-time 30 \
+            --retry-all-errors \
             --retry-connrefused \
             http://127.0.0.1:8080/)"
           echo "CloudDeploy ${GITHUB_EVENT_WORKFLOW_RUN_HEAD_SHA} returned HTTP ${status_code}."
