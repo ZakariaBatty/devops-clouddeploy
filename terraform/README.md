@@ -8,6 +8,7 @@ This directory defines the small AWS foundation for the CloudDeploy learning pro
 - an existing EC2 key pair for SSH authentication.
 
 Terraform resolves the latest matching official Ubuntu image published by Canonical at plan time. The default `t3.micro` instance type uses the image's x86_64 architecture.
+The default AWS region is `eu-north-1` (Europe/Stockholm).
 
 ## Files
 

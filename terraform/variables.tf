@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region in which to create the CloudDeploy infrastructure."
   type        = string
-  default     = "eu-west-3"
+  default     = "eu-north-1"
 }
 
 variable "instance_type" {
