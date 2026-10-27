@@ -1,0 +1,7 @@
+# Copy this file to terraform.tfvars and replace both example values.
+# terraform.tfvars is ignored by Git because it contains environment-specific data.
+
+aws_region      = "eu-west-3"
+instance_type   = "t3.micro"
+key_pair_name   = "your-existing-key-pair-name"
+ssh_allowed_cidr = "203.0.113.10/32"

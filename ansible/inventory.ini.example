@@ -1,0 +1,5 @@
+[webservers]
+clouddeploy ansible_host=203.0.113.10 ansible_user=ubuntu
+
+# Replace the example address with Terraform's public_ip output.
+# Supply the private key externally with --private-key; never store it here.

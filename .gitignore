@@ -4,3 +4,14 @@
 .vscode/
 *.swp
 *~
+
+# Terraform local working data and state
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# Ansible environment-specific inventory and private keys
+ansible/inventory.ini
+ansible/*.pem
+ansible/*.key

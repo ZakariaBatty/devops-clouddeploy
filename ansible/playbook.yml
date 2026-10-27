@@ -1,0 +1,33 @@
+---
+- name: Configure CloudDeploy web servers
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Update the APT package cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install Docker Engine and deployment utilities
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - docker.io
+          - git
+          - unzip
+        state: present
+
+    - name: Enable and start Docker
+      ansible.builtin.service:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Add the SSH user to the Docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user | default('ubuntu') }}"
+        groups:
+          - docker
+        append: true
