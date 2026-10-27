@@ -1,0 +1,70 @@
+name: CloudDeploy Local CD
+
+on:
+  workflow_run:
+    workflows:
+      - CloudDeploy CI
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy on GitHub runner
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CONTAINER_NAME: clouddeploy-local
+      IMAGE_TAG: clouddeploy:local-${{ github.event.workflow_run.head_sha }}
+
+    steps:
+      - name: Check out the verified commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+
+      - name: Build Docker image
+        run: docker build --tag "$IMAGE_TAG" .
+
+      - name: Deploy container on runner
+        run: |
+          docker run \
+            --detach \
+            --name "$CONTAINER_NAME" \
+            --publish 127.0.0.1:8080:80 \
+            "$IMAGE_TAG"
+
+      - name: Verify deployment
+        run: |
+          status_code="$(curl \
+            --silent \
+            --show-error \
+            --output /dev/null \
+            --write-out '%{http_code}' \
+            --retry 10 \
+            --retry-delay 1 \
+            --retry-connrefused \
+            http://127.0.0.1:8080/)"
+          echo "CloudDeploy ${GITHUB_EVENT_WORKFLOW_RUN_HEAD_SHA} returned HTTP ${status_code}."
+          test "$status_code" = "200"
+        env:
+          GITHUB_EVENT_WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Display deployment logs
+        if: always()
+        run: |
+          docker ps --all --filter "name=^/${CONTAINER_NAME}$"
+          docker logs "$CONTAINER_NAME" 2>&1 || true
+
+      - name: Clean up container
+        if: always()
+        run: docker rm --force "$CONTAINER_NAME" 2>/dev/null || true
