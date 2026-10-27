@@ -1,13 +1,7 @@
 name: CloudDeploy CD
 
 on:
-  workflow_run:
-    workflows:
-      - CloudDeploy CI
-    types:
-      - completed
-    branches:
-      - main
+  # Re-enable workflow_run after AWS EC2 is provisioned and GitHub deployment secrets are configured.
   workflow_dispatch:
 
 permissions:
