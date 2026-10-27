@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CloudDeploy is a one-day Master DevOps project demonstrating a clear path from infrastructure to automated delivery."
+    />
+    <title>CloudDeploy | Master DevOps Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="CloudDeploy home">
+        <span class="brand-mark" aria-hidden="true">CD</span>
+        <span>CloudDeploy</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#project">Project</a>
+        <a href="#stack">Stack</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Master DevOps · One-Day Project</p>
+          <h1 id="hero-title">From code to cloud, <span>clearly.</span></h1>
+          <p class="hero-text">
+            A focused DevOps project that brings infrastructure, configuration,
+            containers, cloud hosting, and continuous delivery into one simple workflow.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#stack">Explore the stack</a>
+            <a class="button button-secondary" href="#project">View the approach</a>
+          </div>
+        </div>
+
+        <div class="terminal" aria-label="CloudDeploy delivery workflow">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <p>clouddeploy — pipeline</p>
+          </div>
+          <div class="terminal-body">
+            <p><span class="prompt">$</span> clouddeploy launch</p>
+            <p><span class="success">✓</span> Infrastructure defined</p>
+            <p><span class="success">✓</span> Server configured</p>
+            <p><span class="success">✓</span> Container published</p>
+            <p><span class="success">✓</span> Deployment automated</p>
+            <p class="ready">STATUS: READY</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="project" aria-labelledby="project-title">
+        <div class="section-heading">
+          <p class="eyebrow">The project</p>
+          <h2 id="project-title">One workflow. Five essential tools.</h2>
+          <p>
+            CloudDeploy is intentionally small and practical: every component has one
+            clear responsibility and every step is easy to demonstrate.
+          </p>
+        </div>
+
+        <div class="process" aria-label="Project workflow">
+          <article>
+            <span>01</span>
+            <h3>Provision</h3>
+            <p>Create reliable cloud infrastructure as code.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Configure</h3>
+            <p>Prepare the server with repeatable automation.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Package</h3>
+            <p>Ship the application as a portable container.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Deliver</h3>
+            <p>Deploy each change through a clear CI/CD pipeline.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack-section" id="stack" aria-labelledby="stack-title">
+        <div class="section-heading">
+          <p class="eyebrow">Technology stack</p>
+          <h2 id="stack-title">Built with industry standards.</h2>
+        </div>
+
+        <div class="stack-grid">
+          <article class="tech-card">
+            <span class="tech-icon" aria-hidden="true">TF</span>
+            <div><h3>Terraform</h3><p>Infrastructure as code</p></div>
+          </article>
+          <article class="tech-card">
+            <span class="tech-icon" aria-hidden="true">AN</span>
+            <div><h3>Ansible</h3><p>Configuration automation</p></div>
+          </article>
+          <article class="tech-card">
+            <span class="tech-icon" aria-hidden="true">DK</span>
+            <div><h3>Docker</h3><p>Application containerization</p></div>
+          </article>
+          <article class="tech-card">
+            <span class="tech-icon" aria-hidden="true">EC2</span>
+            <div><h3>AWS EC2</h3><p>Cloud compute</p></div>
+          </article>
+          <article class="tech-card">
+            <span class="tech-icon" aria-hidden="true">GA</span>
+            <div><h3>GitHub Actions</h3><p>Continuous delivery</p></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">CD</span>
+        <span>CloudDeploy</span>
+      </a>
+      <p>Simple infrastructure. Reliable delivery.</p>
+    </footer>
+  </body>
+</html>

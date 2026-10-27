@@ -1,0 +1,58 @@
+name: CloudDeploy CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Validate and test container
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate static website
+        run: |
+          test -s website/index.html
+          test -s website/style.css
+          grep -qi '<!doctype html>' website/index.html
+          grep -q '<title>CloudDeploy' website/index.html
+          grep -q 'href="style.css"' website/index.html
+
+      - name: Build Docker image
+        run: docker build --tag clouddeploy:ci .
+
+      - name: Start test container
+        run: |
+          docker run \
+            --detach \
+            --name clouddeploy-ci \
+            --publish 127.0.0.1:8080:80 \
+            clouddeploy:ci
+
+      - name: Verify HTTP response
+        run: |
+          status_code="$(curl \
+            --silent \
+            --show-error \
+            --output /dev/null \
+            --write-out '%{http_code}' \
+            --retry 5 \
+            --retry-delay 1 \
+            --retry-connrefused \
+            http://127.0.0.1:8080/)"
+          test "$status_code" = "200"
+
+      - name: Clean up test container
+        if: always()
+        run: docker rm --force clouddeploy-ci 2>/dev/null || true
